@@ -1,0 +1,30 @@
+﻿@using Orchard.UI.Notify
+@*
+    Model.Message can either be:
+    - an IHtmlString and won't be re-encoded
+    - a string and will be encoded
+*@
+@{
+    var htmlTagType = "";
+    var messageType = (NotifyType)Model.Type;
+    switch (messageType) {
+        case NotifyType.Information:
+            htmlTagType = "success";
+            break;
+        case NotifyType.Warning:
+            htmlTagType = "warning";
+            break;
+        case NotifyType.Error:
+            htmlTagType = "alert";
+            break;
+        default:
+            htmlTagType = "";
+            break;
+    }
+}
+<div class="callout @htmlTagType" data-closable="">
+    @Html.Raw(Html.Encode(Model.Message).Replace("\n", "<br />"))
+    <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>

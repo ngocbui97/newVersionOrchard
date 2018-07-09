@@ -1,0 +1,48 @@
+﻿@model Orchard.Comments.Models.CommentPart
+@{
+
+}
+@if (WorkContext.CurrentUser == null) {
+    <div class="row">
+        <div class="columns medium-10 large-8 small-12">
+            <h3 id="add-comment">@T("Add a Comment")</h3>
+            <ul class="no-bullet">
+                <li>
+                    @Html.LabelFor(m => m.Author, T("Name"))
+                    @Html.TextBoxFor(m => m.Author)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.Email, T("Email"))
+                    @Html.TextBoxFor(m => m.Email)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.SiteName, T("Url"))
+                    @Html.TextBoxFor(m => m.SiteName)
+                </li>
+            </ul>
+        </div>
+    </div>
+}
+else {
+    @Html.Hidden("Name", WorkContext.CurrentUser.UserName ?? "")
+    @Html.Hidden("Email", WorkContext.CurrentUser.Email ?? "")
+}
+@if (WorkContext.CurrentUser != null) {
+    <h3 id="commenter">
+        @if (WorkContext.CurrentUser != null) {
+            @T("Hi, {0}!", Convert.ToString(Html.ItemDisplayText(WorkContext.CurrentUser)))
+        }
+    </h3>
+}
+<div class="row">
+    <div class="columns medium-12">
+        <ul class="no-bullet">
+            <li>
+                @Html.LabelFor(m => m.CommentText, T("Comment"))
+                @Html.TextAreaFor(m => m.CommentText, new { rows = 10, cols = 30, @class = "comment-text" })
+            </li>
+        </ul>
+    </div>
+    @Html.HiddenFor(m => m.CommentedOn)
+    @Html.HiddenFor(m => m.RepliedOn)
+</div>

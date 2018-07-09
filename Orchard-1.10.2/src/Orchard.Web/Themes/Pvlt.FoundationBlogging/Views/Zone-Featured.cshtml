@@ -1,0 +1,11 @@
+﻿@using Orchard.Core.Shapes
+@{
+    Model.Classes.Add("column row");
+    // Copy from core shape defined in CoreShapes.cs
+    var tag = Tag(Model, "div");
+}
+@tag.StartElement
+@foreach (var item in CoreShapes.Order(Model)) {
+    @Display(item)
+}
+@tag.EndElement

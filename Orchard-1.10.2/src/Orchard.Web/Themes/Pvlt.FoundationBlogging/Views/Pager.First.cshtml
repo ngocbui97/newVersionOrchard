@@ -1,0 +1,7 @@
+﻿@{
+    var routeValues = (RouteValueDictionary)Model.RouteValues;
+    var text = Model.Value;
+}
+<li>
+    <a href="@Url.Action((string)routeValues["action"], routeValues)">&lsaquo; @text</a>
+</li>

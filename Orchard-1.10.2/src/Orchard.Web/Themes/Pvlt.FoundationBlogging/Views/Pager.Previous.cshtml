@@ -1,0 +1,7 @@
+﻿@{
+    var routeValues = (RouteValueDictionary)Model.RouteValues;
+    var text = Model.Value;
+}
+<li class="pagination-previous">
+    <a href="@Url.Action((string)routeValues["action"], routeValues)" aria-label="@T("{0} page", text)">@text</a>
+</li>

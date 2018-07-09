@@ -1,0 +1,120 @@
+﻿@{
+    /* Global includes for the theme
+    ***************************************************************/
+    SetMeta(httpEquiv: "X-UA-Compatible", content: "IE=edge,chrome=1");
+    Style.Include("foundation.css", "foundation.min.css");
+    Style.Include("Styles.css", "Styles.min.css");
+    Script.Require("jQuery");
+    Script.Include("foundation.js", "foundation.min.js");
+    Script.Include("what-input.js");
+    Script.Include("site.js");
+
+    /* Some useful shortcuts or settings
+    ***************************************************************/
+    Func<dynamic, dynamic> Zone = x => Display(x); // Zone as an alias for Display to help make it obvious when we're displaying zones
+
+    /* Inserting some ad hoc shapes
+    ***************************************************************/
+    WorkContext.Layout.AfterFooter.Add(New.User(), "10"); // Login and dashboard links
+
+    var contentColumnSize = Model.AsideFirst != null
+        ? (Model.AsideSecond != null ? "6" : "9")
+        : (Model.AsideSecond != null ? "9" : "12");
+
+    /* Last bit of code to prep the layout wrapper
+    ***************************************************************/
+    Model.Id = "layout-wrapper";
+    var tag = Tag(Model, "div"); // using Tag so the layout div gets the classes, id and other attributes added to the Model
+}
+@tag.StartElement
+<!-- should be a header wrapper (and what about a wrapper for the default layout?) -->
+@if (Model.Navigation != null) {
+    <div id="layout-navigation" class="layout-row">
+        @Zone(Model.Navigation)
+    </div>
+}
+@if (Model.Header != null) {
+    <header id="layout-header" class="layout-row">
+        @Zone(Model.Header)
+    </header>
+}
+@if (Model.Featured != null) {
+    <div id="layout-featured" class="layout-row">
+        @Zone(Model.Featured)
+    </div>
+}
+@if (Model.BeforeMain != null) {
+    <div id="layout-beforemain" class="layout-row">
+        @Zone(Model.BeforeMain)
+    </div>
+}
+<div id="layout-main" class="layout-row">
+    <div class="column row">
+        <div class="row">
+            @if (Model.AsideFirst != null) {
+                <div id="layout-main-left" class="columns medium-3">
+                    <div id="layout-asidefirst">
+                        @Zone(Model.AsideFirst)
+                    </div>
+                </div>
+            }
+            <div id="layout-main-center" class="columns medium-@contentColumnSize">
+                @if (Model.BeforeContent != null) {
+                    <div id="layout-beforecontent">
+                        @Zone(Model.BeforeContent)
+                    </div>
+                }
+                @if (Model.Messages != null) {
+                    <div id="layout-messages">
+                        @Zone(Model.Messages)
+                    </div>
+                }
+                @if (Model.Content != null) {
+                    <div id="layout-content">
+                        @Zone(Model.Content)
+                    </div>
+                }
+                @if (Model.AfterContent != null) {
+                    <div id="layout-AfterContent">
+                        @Zone(Model.AfterContent)
+                    </div>
+                }
+            </div>
+            @if (Model.AsideSecond != null) {
+                <div id="layout-main-right" class="columns medium-3">
+                    <div id="layout-asidesecond">
+                        @Zone(Model.AsideSecond)
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@if (Model.AfterMain != null) {
+    <div id="layout-aftermain" class="layout-row">
+        @Zone(Model.AfterMain)
+    </div>
+}
+@if (Model.BeforeFooter != null) {
+    <div id="layout-beforefooter" class="layout-row">
+        @Zone(Model.BeforeFooter)
+    </div>
+}
+@if (Model.MainFooter != null) {
+    <div id="layout-mainfooter" class="layout-row">
+        @Zone(Model.MainFooter)
+    </div>
+}
+@if (Model.AfterFooter != null) {
+    <div id="layout-afterfooter" class="layout-row">
+        @Zone(Model.AfterFooter)
+    </div>
+}
+@tag.EndElement
+@using (Script.Foot()) {
+    <script type="text/javascript">
+        $(function () {
+            $(document).foundation();
+        });
+    </script>
+}

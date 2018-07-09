@@ -1,0 +1,12 @@
+﻿@using Orchard.Tags.Models
+<div class="tag-cloud">
+@foreach (TagCount tagCount in Model.TagCounts) {
+    <span class="tag-cloud-tag tag-cloud-tag-@tagCount.Bucket label secondary">
+        @Html.ActionLink(tagCount.TagName, "Search", "Home", new {
+                area = "Orchard.Tags",
+                tagName = tagCount.TagName
+            }, null
+        )
+    </span>
+}
+</div>

@@ -1,0 +1,13 @@
+﻿@{
+    Model.Classes.Add("dropdown");
+    Model.Attributes.Add("data-dropdown-menu", "");
+    var tag = Tag(Model, "ul");
+    var items = (IList<dynamic>)Enumerable.Cast<dynamic>(Model.Items);
+    if (items.Any()) {
+        items[0].Classes.Add("first");
+        items[items.Count - 1].Classes.Add("last");
+    }
+}
+@tag.StartElement
+@DisplayChildren(Model)
+@tag.EndElement

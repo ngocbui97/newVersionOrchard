@@ -1,0 +1,8 @@
+Name: Foudation Blogging
+Author: Pierre Vanlinthout
+Website: http://www.orchardproject.net
+Description: A theme that uses "Zurb Foundation for Sites" and that can be used as master theme for novice theme developers. It overrides templates for Menu, Pager, Zone, Comments, Elements and some other parts and views.
+Version: 1.0
+Zones: Header, Navigation, Featured, BeforeMain, AsideFirst, Messages, BeforeContent, Content, AfterContent, AsideSecond, AfterMain, BeforeFooter, MainFooter, AfterFooter
+Tags: Foundation, Blog, Blogging
+Dependencies: Orchard.Widgets, Orchard.Comments, Orchard.Layouts

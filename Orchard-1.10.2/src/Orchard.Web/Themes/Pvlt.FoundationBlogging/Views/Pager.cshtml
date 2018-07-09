@@ -1,0 +1,13 @@
+﻿@{
+    Model.Quantity = 5; // page links to show
+    Model.PreviousText = T("previous");
+    Model.NextText = T("next");
+    Model.FirstText = T("first");
+    Model.LastText = T("last");
+    Model.Classes.Add("pagination text-center");
+    Model.Attributes.Add("role", "navigation");
+    Model.Attributes.Add("aria-label", "Pagination");
+    Model.Metadata.Alternates.Clear();
+    Model.Metadata.Type = "Pager_Links";
+}
+@Display(Model)
